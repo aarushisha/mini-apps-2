@@ -6,13 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "json-server": "json-server --watch data/db.json --static public/index.html"
+    "json-server": "json-server --watch data/db.json --static public/index.html",
+    "build": "webpack -d --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "json-server": "^0.15.0",
     "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-paginate": "^6.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
   }
 }
