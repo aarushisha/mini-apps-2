@@ -10,13 +10,16 @@ class App extends React.Component {
     super(props)
     this.state = {
       searchResults: [],
+      offset: 0,
       activePage:1,
       totalPages: null,
       itemsCountPerPage: 10,
       totalItemsCount:null,
-      links: {}
+      links: {},
+      keyword: null,
     };
     this.searchKeyword = this.searchKeyword.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
 
   searchKeyword() {
@@ -30,11 +33,30 @@ class App extends React.Component {
         var links = parse(head.link);
         var count = head["x-total-count"];
         var totalPages = count / this.state.itemsCountPerPage;
-        this.setState({totalItemsCount: count, links: links, totalPages: totalPages});
+        this.setState({totalItemsCount: count, links: links, totalPages: totalPages, keyword: keyword});
         var events = response.json();
         return events;
       })
       .then(events => this.setState({searchResults: events}))
+  }
+
+  handlePageClick() {
+    var page = this.state.activePage;
+    if (event.target.innerHTML === "previous" && this.state.activePage !== 1) {
+      page = this.state.activePage - 1;
+    } else if (event.target.innerHTML === "next"  && this.state.activePage !== totalPages) {
+      page = this.state.activePage + 1;
+    } else {
+      page = parseInt(event.target.innerHTML);
+    }
+    var keyword = this.state.keyword;
+    var url = `http://localhost:3000/events?_page=${page}&_limit=10&q=${keyword}`;
+    this.setState({activePage: page});
+
+    fetch(url)
+      .then(response => response.json())
+        .then(events => this.setState({searchResults: events}))
+    
   }
 
   render() {
