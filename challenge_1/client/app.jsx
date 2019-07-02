@@ -44,7 +44,7 @@ class App extends React.Component {
     var page = this.state.activePage;
     if (event.target.innerHTML === "previous" && this.state.activePage !== 1) {
       page = this.state.activePage - 1;
-    } else if (event.target.innerHTML === "next"  && this.state.activePage !== totalPages) {
+    } else if (event.target.innerHTML === "next"  && this.state.activePage !== this.state.totalPages) {
       page = this.state.activePage + 1;
     } else {
       page = parseInt(event.target.innerHTML);
