@@ -79,12 +79,12 @@ class App extends React.Component {
         <button onClick={this.getBPI} id="submit-dates">Submit</button>
         </div>
         <div id="chart">
-        <div id="disclaimer">{this.state.disclaimer}</div>
         <Line data={this.state.data}
               width={10}
               height={400}
               options={{ maintainAspectRatio: false }}/>
         </div>
+        <div id="disclaimer">{this.state.disclaimer}</div>
       </div>
     )
   }
