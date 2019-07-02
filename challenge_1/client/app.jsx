@@ -16,10 +16,32 @@ class App extends React.Component {
       itemsCountPerPage: 10,
       totalItemsCount:null,
       links: {},
-      keyword: null,
+      keyword: '',
     };
     this.searchKeyword = this.searchKeyword.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.getAll = this.getAll.bind(this);
+  }
+
+  componentDidMount() {
+    this.getAll();
+  }
+
+  getAll() {
+    var url = `http://localhost:3000/events?_page=1&_limit=10`;
+    fetch(url)
+    .then(response => {
+      var head = {};
+      response.headers.forEach(function(val, key) { head[key] = val });
+      var links = parse(head.link);
+      var count = head["x-total-count"];
+      var totalPages = count / this.state.itemsCountPerPage;
+      this.setState({totalItemsCount: count, links: links, totalPages: totalPages});
+      var events = response.json();
+      return events;
+    })
+    .then(events => this.setState({searchResults: events}))
+
   }
 
   searchKeyword() {
