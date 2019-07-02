@@ -1,23 +1,30 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import Result from './result.jsx'
+import Result from './result.jsx';
+import axios from 'axios';
+var parse = require('parse-link-header');
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchResults: []
+      searchResults: [],
+      activePage:1,
+      totalPages: null,
+      itemsCountPerPage: null,
+      totalItemsCount:null
     };
     this.searchKeyword = this.searchKeyword.bind(this);
   }
 
   searchKeyword() {
     var keyword = document.getElementById('keyword-input').value;
-    fetch(`http://localhost:3000/events?q=${keyword}`)
-    .then(results => results.json())
-    .then(events => this.setState({searchResults: events}))
+    var url = `http://localhost:3000/events?_page=1&_limit=10&q=${keyword}`;
 
+    fetch(url)
+      .then(response => response.json())
+        .then(events => this.setState({searchResults: events}))
   }
 
   render() {
