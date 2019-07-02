@@ -87,9 +87,12 @@ class App extends React.Component {
         <h1>Historical Events Finder</h1>
         <input id="keyword-input" type="text" placeholder="Search by Keyword..."></input>
         <button onClick={this.searchKeyword} id="search">Search</button>
+        <br></br>
         <div id="table-container">
         <table id="search-results">
         <tr>
+          <th></th>
+          <th></th>
           <th>Date</th>
           <th>Description</th>
         </tr>
