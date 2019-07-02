@@ -21,6 +21,7 @@ class App extends React.Component {
     this.searchKeyword = this.searchKeyword.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.getAll = this.getAll.bind(this);
+    this.makeEditable = this.makeEditable.bind(this);
   }
 
   componentDidMount() {
@@ -81,6 +82,10 @@ class App extends React.Component {
     
   }
 
+  makeEditable() {
+    console.log(event.target)
+  }
+
   render() {
     return (
       <div>
@@ -96,7 +101,7 @@ class App extends React.Component {
           <th>Date</th>
           <th>Description</th>
         </tr>
-        {this.state.searchResults.map(result => <Result date={result.date} description={result.description}/>)}
+        {this.state.searchResults.map(result => <Result makeEditable={this.makeEditable} date={result.date} description={result.description}/>)}
         </table>
 
         </div>        
