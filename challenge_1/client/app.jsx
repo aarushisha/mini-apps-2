@@ -12,8 +12,9 @@ class App extends React.Component {
       searchResults: [],
       activePage:1,
       totalPages: null,
-      itemsCountPerPage: null,
-      totalItemsCount:null
+      itemsCountPerPage: 10,
+      totalItemsCount:null,
+      links: {}
     };
     this.searchKeyword = this.searchKeyword.bind(this);
   }
@@ -23,8 +24,17 @@ class App extends React.Component {
     var url = `http://localhost:3000/events?_page=1&_limit=10&q=${keyword}`;
 
     fetch(url)
-      .then(response => response.json())
-        .then(events => this.setState({searchResults: events}))
+      .then(response => {
+        var head = {};
+        response.headers.forEach(function(val, key) { head[key] = val });
+        var links = parse(head.link);
+        var count = head["x-total-count"];
+        var totalPages = count / this.state.itemsCountPerPage;
+        this.setState({totalItemsCount: count, links: links, totalPages: totalPages});
+        var events = response.json();
+        return events;
+      })
+      .then(events => this.setState({searchResults: events}))
   }
 
   render() {
@@ -49,7 +59,7 @@ class App extends React.Component {
           nextLabel={'next'}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={this.state.pageCount}
+          pageCount={this.state.totalPages}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
