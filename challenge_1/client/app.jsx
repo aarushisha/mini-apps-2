@@ -26,8 +26,30 @@ class App extends React.Component {
         <h1>Historical Events Finder</h1>
         <input id="keyword-input" type="text" placeholder="Search by Keyword..."></input>
         <button onClick={this.searchKeyword} id="search">Search</button>
-        <div id="search-results">
+        <div id="table-container">
+        <table id="search-results">
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
         {this.state.searchResults.map(result => <Result date={result.date} description={result.description}/>)}
+        </table>
+
+        </div>        
+        <div id="react-paginate">
+        <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={this.state.pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
+        />
         </div>
       </div>
     )

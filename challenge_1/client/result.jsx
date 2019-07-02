@@ -2,10 +2,10 @@ import React from 'react';
 
 const Result = (props) => {
   return (
-    <div>
-      <div>{props.date}</div>
-      <div>{props.description}</div>
-    </div>
+      <tr>
+      <td>{props.date}</td>
+      <td>{props.description}</td>
+      </tr>
   )
 }
 
