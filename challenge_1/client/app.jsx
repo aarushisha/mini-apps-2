@@ -83,7 +83,11 @@ class App extends React.Component {
   }
 
   makeEditable() {
-    console.log(event.target)
+    var row = event.target.parentNode.parentNode;
+    console.log(row);
+    var children = row.children;
+    children[2].setAttribute("contenteditable", true);
+    children[3].setAttribute("contenteditable", true);
   }
 
   render() {
