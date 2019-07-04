@@ -23,15 +23,6 @@ class App extends React.Component {
     fetch(`https://api.coindesk.com/v1/bpi/historical/close.json?start=${start}&end=${end}`)
     .then(response => response.json())
     .then(results => {
-      // var data = [];
-      // for (var key in results.bpi) {
-      //   var obj = {};
-      //   obj.x = key;
-      //   obj.y = results.bpi[key];
-      //   data.push(obj);
-      // }
-      // var dataset = {datasets: data}
-      // console.log(dataset);
       var data = [];
       var labels = [];
       for (var key in results.bpi) {
