@@ -22,6 +22,7 @@ class App extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.getAll = this.getAll.bind(this);
     this.makeEditable = this.makeEditable.bind(this);
+    this.save = this.save.bind(this);
   }
 
   componentDidMount() {
@@ -84,10 +85,26 @@ class App extends React.Component {
 
   makeEditable() {
     var row = event.target.parentNode.parentNode;
-    console.log(row);
     var children = row.children;
+    for (var i = 0; i < children.length; i++) {
+      children[i].setAttribute("style", "background-color: green;");
+    }
     children[2].setAttribute("contenteditable", true);
     children[3].setAttribute("contenteditable", true);
+  }
+
+  save() {
+    var row = event.target.parentNode.parentNode;
+    var children = row.children;
+    //how to track what original data is to then find the original and change it 
+    for (var i = 0; i < children.length; i++) {
+      children[i].setAttribute("style", "background-color: white;");
+    }
+    children[2].setAttribute("contenteditable", false);
+    children[3].setAttribute("contenteditable", false);
+    var originalTextDate = row.children[2].innerHTML;
+    var originalDescription = row.children[3].innerHTML;
+    
   }
 
   render() {
@@ -105,7 +122,7 @@ class App extends React.Component {
           <th>Date</th>
           <th>Description</th>
         </tr>
-        {this.state.searchResults.map(result => <Result makeEditable={this.makeEditable} date={result.date} description={result.description}/>)}
+        {this.state.searchResults.map(result => <Result makeEditable={this.makeEditable} save={this.save} date={result.date} description={result.description}/>)}
         </table>
 
         </div>        
