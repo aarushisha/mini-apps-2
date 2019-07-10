@@ -70,7 +70,7 @@ class App extends React.Component {
             }
             alert ("GAME OVER!");
           } 
-          if (playsCopy[i][4].totalScore === 10) {
+          if (playsCopy[i][4].totalScore === 10 && playsCopy[i][0] !== 10) {
             playsCopy[i][3].spare = true;
             console.log(playsCopy[i][3])
           }
