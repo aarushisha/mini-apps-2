@@ -37,7 +37,7 @@ class App extends React.Component {
     //why does numberOfPins === 0 not work?
     for (var i = 0; i < this.state.plays.length; i++) {
       for (var j = 0; j < this.state.plays[i].length; j++) {
-        if (this.state.plays[i][j] === 0) {
+        if (this.state.plays[i][j] === 0 && this.state.plays[i][j] !== null) {
           frame = i;
           ball = j;
           if (j === 1 && ((this.state.plays[i][0] + numberOfPins) > 10)) {
@@ -49,12 +49,28 @@ class App extends React.Component {
           if (numberOfPins === 0) {
             playsCopy[frame][ball] = "0";
           }
+          if (numberOfPins === 10 && j === 0) {
+            playsCopy[i][2].strike = true;
+            playsCopy[i][1] = "0";
+            console.log(playsCopy[i][2]);
+          }
           if (j === 1 && i === 0) {
             playsCopy[i][4].totalScore = this.state.plays[i][0] + parseInt(numberOfPins);
             console.log(playsCopy[i][4]);
-          } else if (j === 1 && i !== 0){
-            playsCopy[i][4].totalScore = parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins);
+          } if (j === 1 && i !== 0){
+            playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
             console.log(playsCopy[i][4]);
+          } if (j === 1 && i === 9){
+            if (playsCopy[i][2].strike === false && playsCopy[i][2].spare === false) {
+              playsCopy[i][1] = null;
+              playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
+              console.log(playsCopy[i][4]);
+            }
+            alert ("GAME OVER!");
+          } 
+          if (playsCopy[i][4].totalScore === 10) {
+            playsCopy[i][3].spare = true;
+            console.log(playsCopy[i][3])
           }
           this.setState({plays: playsCopy});
           return;
