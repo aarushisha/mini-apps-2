@@ -10,14 +10,14 @@ class App extends React.Component {
     this.state = {
       plays: [
         [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
         [0, 0, 0, "filler", {totalScore: null}]
       ], 
       score: 0
@@ -70,9 +70,9 @@ class App extends React.Component {
             }
             alert ("GAME OVER!");
           } 
-          if (playsCopy[i][4].totalScore === 10 && playsCopy[i][0] !== 10) {
+          if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) {
             playsCopy[i][3].spare = true;
-            console.log(playsCopy[i][3])
+            console.log(playsCopy[i][3].spare);
           }
           this.setState({plays: playsCopy});
           return;
