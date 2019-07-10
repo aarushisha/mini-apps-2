@@ -34,7 +34,8 @@ class App extends React.Component {
     console.log(numberOfPins);
     var frame = 0;
     var ball = 0;
-    //why does numberOfPins === 0 not work?
+    //need to check if there was a spare one frame earlier -> add current ball to that previous frame score
+    //need to check if there was a strike one frame earlier -> add current entire frame to previous frame score
     for (var i = 0; i < this.state.plays.length; i++) {
       for (var j = 0; j < this.state.plays[i].length; j++) {
         if (this.state.plays[i][j] === 0 && this.state.plays[i][j] !== null) {
@@ -52,6 +53,7 @@ class App extends React.Component {
           if (numberOfPins === 10 && j === 0) {
             playsCopy[i][2].strike = true;
             playsCopy[i][1] = "0";
+            playsCopy[i][4].totalScore = 10;
             console.log(playsCopy[i][2]);
           }
           if (j === 1 && i === 0) {
