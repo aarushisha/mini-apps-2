@@ -49,8 +49,11 @@ class App extends React.Component {
           if (numberOfPins === 0) {
             playsCopy[frame][ball] = "0";
           }
-          if (j === 1) {
+          if (j === 1 && i === 0) {
             playsCopy[i][4].totalScore = this.state.plays[i][0] + parseInt(numberOfPins);
+            console.log(playsCopy[i][4]);
+          } else if (j === 1 && i !== 0){
+            playsCopy[i][4].totalScore = parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins);
             console.log(playsCopy[i][4]);
           }
           this.setState({plays: playsCopy});
