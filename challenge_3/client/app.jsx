@@ -9,16 +9,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       plays: [
-        [0, 0, {strike: false}, {spare: false}, {totalScore: 7}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: null}],
-        [0, 0, 0, {totalScore: null}]
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
+        [0, 0, 0, "filler", {totalScore: null}]
       ], 
       score: 0
     };
@@ -30,17 +30,29 @@ class App extends React.Component {
   }
 
   choosePinNumber() {
-    var numberOfPins = event.target.innerHTML;
+    var numberOfPins = parseInt(event.target.innerHTML);
     console.log(numberOfPins);
     var frame = 0;
     var ball = 0;
+    //why does numberOfPins === 0 not work?
     for (var i = 0; i < this.state.plays.length; i++) {
       for (var j = 0; j < this.state.plays[i].length; j++) {
         if (this.state.plays[i][j] === 0) {
           frame = i;
           ball = j;
+          if (j === 1 && ((this.state.plays[i][0] + numberOfPins) > 10)) {
+            alert((this.state.plays[i][0] + numberOfPins) + " pins selected for frame! That's too many!");
+            return;
+          }
           var playsCopy = _.cloneDeep(this.state.plays);
           playsCopy[frame][ball] = numberOfPins;
+          if (numberOfPins === 0) {
+            playsCopy[frame][ball] = "0";
+          }
+          if (j === 1) {
+            playsCopy[i][4].totalScore = this.state.plays[i][0] + parseInt(numberOfPins);
+            console.log(playsCopy[i][4]);
+          }
           this.setState({plays: playsCopy});
           return;
         }
