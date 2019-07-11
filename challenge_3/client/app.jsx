@@ -50,30 +50,48 @@ class App extends React.Component {
           if (numberOfPins === 0) {
             playsCopy[frame][ball] = "0";
           }
+          if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) {
+            playsCopy[i][3].spare = true;
+            playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
+            console.log(playsCopy[i + 1]);
+          }
           if (numberOfPins === 10 && j === 0) {
             playsCopy[i][2].strike = true;
+            playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
+            playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
             playsCopy[i][1] = "0";
-            playsCopy[i][4].totalScore = 10;
-            console.log(playsCopy[i][2]);
+            if (i === 0) {
+              playsCopy[i][4].totalScore = 10;
+            } else {
+              playsCopy[i][4].totalScore = playsCopy[i - 1][4].totalScore + 10;
+            }
+            
+            console.log(playsCopy[i]);
+          }
+          if (j === 0 && i > 1 && i < 10 && playsCopy[i][5].pointsCountForLastFrame1 === true) {
+            console.log("hi the last frame was a spare!");
+            playsCopy[i - 1][4].totalScore += parseInt(numberOfPins);
+            console.log('spare so adding the score of one ball', playsCopy[i - 1][4].totalScore);
+          }
+          if (j === 1 && i > 1 && i < 10 && playsCopy[i][6].pointsCountForLastFrame1 === true) {
+            console.log("hi the last frame was a strike!");
+            playsCopy[i - 1][4].totalScore += parseInt(numberOfPins);
+            console.log('strike so adding the score of two balls', playsCopy[i - 1][4].totalScore);
           }
           if (j === 1 && i === 0) {
             playsCopy[i][4].totalScore = this.state.plays[i][0] + parseInt(numberOfPins);
-            console.log(playsCopy[i][4]);
+            console.log(playsCopy[i]);
           } if (j === 1 && i !== 0){
             playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
-            console.log(playsCopy[i][4]);
+            console.log(playsCopy[i]);
           } if (j === 1 && i === 9){
             if (playsCopy[i][2].strike === false && playsCopy[i][2].spare === false) {
               playsCopy[i][1] = null;
               playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
-              console.log(playsCopy[i][4]);
+              console.log(playsCopy[i]);
             }
             alert ("GAME OVER!");
           } 
-          if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) {
-            playsCopy[i][3].spare = true;
-            console.log(playsCopy[i][3].spare);
-          }
           this.setState({plays: playsCopy});
           return;
         }
