@@ -18,7 +18,7 @@ class App extends React.Component {
         [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
         [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
         [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0, 0, "filler", {totalScore: null}]
+        [0, 0, 0, "filler", {totalScore: null}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}]
       ], 
       score: 0
     };
@@ -35,7 +35,7 @@ class App extends React.Component {
     var frame = 0;
     var ball = 0;
     //need to check if there was a spare one frame earlier -> add current ball to that previous frame score
-    //need to check if there was a strike one frame earlier -> add current entire frame to previous frame score
+    //need to check if there was a strike one frame earlier -> add current entire frame to previous frame score (only one ball works right now)
     for (var i = 0; i < this.state.plays.length; i++) {
       for (var j = 0; j < this.state.plays[i].length; j++) {
         if (this.state.plays[i][j] === 0 && this.state.plays[i][j] !== null) {
@@ -52,28 +52,32 @@ class App extends React.Component {
           }
           if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) {
             playsCopy[i][3].spare = true;
-            playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
+            if (i < 9) {
+              playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
+            }
             console.log(playsCopy[i + 1]);
           }
           if (numberOfPins === 10 && j === 0) {
             playsCopy[i][2].strike = true;
-            playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
-            playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
+            if (i < 9) {
+              playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
+              playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
+            }
             playsCopy[i][1] = "0";
             if (i === 0) {
               playsCopy[i][4].totalScore = 10;
             } else {
               playsCopy[i][4].totalScore = playsCopy[i - 1][4].totalScore + 10;
-            }
-            
+            }            
             console.log(playsCopy[i]);
+            console.log(playsCopy[i + 1]);
           }
-          if (j === 0 && i > 1 && i < 10 && playsCopy[i][5].pointsCountForLastFrame1 === true) {
+          if (j === 0 && i > 0 && i < 10 && playsCopy[i][5].pointsCountForLastFrame1 === true) {
             console.log("hi the last frame was a spare!");
             playsCopy[i - 1][4].totalScore += parseInt(numberOfPins);
             console.log('spare so adding the score of one ball', playsCopy[i - 1][4].totalScore);
           }
-          if (j === 1 && i > 1 && i < 10 && playsCopy[i][6].pointsCountForLastFrame1 === true) {
+          if (j === 1 && i > 0 && i < 10 && playsCopy[i][6].pointsCountForLastFrame2 === true) {
             console.log("hi the last frame was a strike!");
             playsCopy[i - 1][4].totalScore += parseInt(numberOfPins);
             console.log('strike so adding the score of two balls', playsCopy[i - 1][4].totalScore);
