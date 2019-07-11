@@ -60,16 +60,16 @@ class App extends React.Component {
             playsCopy[i - 1][4].totalScore += parseInt(numberOfPins);
             console.log('strike so adding the score of two balls', playsCopy[i - 1][4].totalScore);
           }
-          if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) {
-            playsCopy[i][3].spare = true;
+          if ((parseInt(this.state.plays[i][0]) + parseInt(numberOfPins) === 10) && playsCopy[i][0] !== 10) { 
             if (i < 9) {
+              playsCopy[i][3].spare = true;
               playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
             }
             console.log(playsCopy[i + 1]);
           }
-          if (numberOfPins === 10 && j === 0) {
-            playsCopy[i][2].strike = true;
+          if (numberOfPins === 10 && j === 0) {     
             if (i < 9) {
+              playsCopy[i][2].strike = true;
               playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
               playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
             }
