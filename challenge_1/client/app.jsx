@@ -94,16 +94,26 @@ class App extends React.Component {
   }
 
   save() {
+    //need to be able to create array with updated object
     var row = event.target.parentNode.parentNode;
     var children = row.children;
-    //how to track what original data is to then find the original and change it 
     for (var i = 0; i < children.length; i++) {
       children[i].setAttribute("style", "background-color: white;");
     }
     children[2].setAttribute("contenteditable", false);
     children[3].setAttribute("contenteditable", false);
-    var originalTextDate = row.children[2].innerHTML;
-    var originalDescription = row.children[3].innerHTML;
+    var newDate = row.children[2].innerHTML;
+    var newDescription = row.children[3].innerHTML;
+    console.log(newDate, newDescription);
+    var url = `http://localhost:3000/events?_page=${this.state.activePage}&_limit=10&q=${this.state.keyword}`;
+    console.log(url);
+    fetch(url, {
+      method: "PUT",
+      headers:  {
+        "Content-Type": 'application/json',
+      },
+      body: JSON.stringify(this.state.searchResults)
+    })
     
   }
 
