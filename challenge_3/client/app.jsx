@@ -100,6 +100,8 @@ class App extends React.Component {
               playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
               console.log("game over");
               alert ("GAME OVER!");
+            } else {
+              
             }
             if (playsCopy[i][2].strike === true) {
 
