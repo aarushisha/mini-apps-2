@@ -1,6 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Cell from './Cell.js'
 
 // function App() {
 //   return (
@@ -16,124 +17,124 @@ class App extends React.Component {
       <table id="grid">
         <tbody>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
+          <Cell />
         </tr>
         </tbody>
       </table>
