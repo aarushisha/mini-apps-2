@@ -11,14 +11,14 @@ class App extends React.Component {
       plays: [
         [0, 0, {strike: false}, {spare: false}, {totalScore: 0}],
         [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}],
-        [0, 0, 0, "filler", {totalScore: null}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}]
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
+        [0, 0, 0, "filler", {totalScore: null}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}]
       ], 
       score: 0
     };
@@ -34,8 +34,7 @@ class App extends React.Component {
     console.log(numberOfPins);
     var frame = 0;
     var ball = 0;
-    //need to check if there was a spare one frame earlier -> add current ball to that previous frame score
-    //need to check if there was a strike one frame earlier -> add current entire frame to previous frame score (only one ball works right now)
+    //need to implement if there are multiple strikes in a row, should add 2 whole frames, not just balls
     for (var i = 0; i < this.state.plays.length; i++) {
       for (var j = 0; j < this.state.plays[i].length; j++) {
         if (this.state.plays[i][j] === 0 && this.state.plays[i][j] !== null) {
@@ -72,15 +71,22 @@ class App extends React.Component {
               playsCopy[i][2].strike = true;
               playsCopy[i + 1][5].pointsCountForLastFrame1 = true;
               playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
-            }
-            playsCopy[i][1] = "0";
+              playsCopy[i][1] = "0";
+            } 
+            if (i > 1) {
+              if (playsCopy[i - 1][2].strike === true && playsCopy[i - 2][2].strike === true ) {
+                playsCopy[i - 2][4].totalScore += 10;
+              }     
+            }  
             if (i === 0) {
               playsCopy[i][4].totalScore = 10;
             } else {
               playsCopy[i][4].totalScore = playsCopy[i - 1][4].totalScore + 10;
             }            
-            console.log(playsCopy[i]);
-            console.log(playsCopy[i + 1]);
+            console.log("playsCopy[i]", playsCopy[i]);
+            console.log("playsCopy[i + 1]", playsCopy[i + 1]);
+            console.log("playsCopy[i - 1]", playsCopy[i - 1]);
+            console.log("playsCopy[i - 2]", playsCopy[i - 2]);
           }
           if (j === 1 && i === 0) {
             playsCopy[i][4].totalScore = this.state.plays[i][0] + parseInt(numberOfPins);
