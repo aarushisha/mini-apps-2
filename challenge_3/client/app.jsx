@@ -74,8 +74,11 @@ class App extends React.Component {
               playsCopy[i][1] = "0";
             } 
             if (i > 1) {
+              //this only works for the first pin 
               if (playsCopy[i - 1][2].strike === true && playsCopy[i - 2][2].strike === true ) {
-                playsCopy[i - 2][4].totalScore += 10;
+                console.log("3 strikes in a row");
+                playsCopy[i - 2][4].totalScore += numberOfPins;
+                playsCopy[i - 1][4].totalScore += numberOfPins;
               }     
             }  
             if (i === 0) {
@@ -83,9 +86,9 @@ class App extends React.Component {
             } else {
               playsCopy[i][4].totalScore = playsCopy[i - 1][4].totalScore + 10;
             }            
-            console.log("playsCopy[i]", playsCopy[i]);
-            console.log("playsCopy[i + 1]", playsCopy[i + 1]);
-            console.log("playsCopy[i - 1]", playsCopy[i - 1]);
+            // console.log("playsCopy[i]", playsCopy[i]);
+            // console.log("playsCopy[i + 1]", playsCopy[i + 1]);
+            // console.log("playsCopy[i - 1]", playsCopy[i - 1]);
             console.log("playsCopy[i - 2]", playsCopy[i - 2]);
           }
           if (j === 1 && i === 0) {
