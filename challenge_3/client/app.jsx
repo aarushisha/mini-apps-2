@@ -73,6 +73,10 @@ class App extends React.Component {
               playsCopy[i + 1][6].pointsCountForLastFrame2 = true;
               playsCopy[i][1] = "0";
             } 
+            if (i === 9) {
+              playsCopy[i][3].strike = true;
+              console.log('strike in last frame!!!!!!!!!!!!!!!!!!!');
+            }
             if (i > 1) {
               if (playsCopy[i - 1][2].strike === true && playsCopy[i - 2][2].strike === true ) {
                 console.log("3 strikes in a row");
@@ -93,20 +97,17 @@ class App extends React.Component {
           } if (j === 1 && i !== 0){
             playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
             console.log(playsCopy[i]);
-          } if (j === 1 && i === 9){
-            if (playsCopy[i][3].strike === false) {
+          } if (j === 1 && i === 9) {
+              if (playsCopy[i][3].strike === false) {
               // playsCopy[i][1] = null;
               playsCopy[i][2] = "0";
               playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
               console.log("game over");
               alert ("GAME OVER!");
-            } else {
-              
-            }
-            if (playsCopy[i][2].strike === true) {
-
-            }
-            
+            }             
+          } if (i === 9 && j === 2 && playsCopy[i][3].strike === true) {
+            playsCopy[i][4].totalScore = parseInt(parseInt(playsCopy[i - 1][4].totalScore) + parseInt(playsCopy[i][0]) + parseInt(playsCopy[i][1]) + parseInt(numberOfPins));
+            alert("GAME OVER!");
           } 
           this.setState({plays: playsCopy});
           return;
