@@ -18,7 +18,7 @@ class App extends React.Component {
         [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
         [0, 0,  {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
         [0, 0, {strike: false}, {spare: false}, {totalScore: 0}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}],
-        [0, 0, 0, "filler", {totalScore: null}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}]
+        [0, 0, 0, {strike: false}, {totalScore: null}, {pointsCountForLastFrame1: false}, {pointsCountForLastFrame2: false}, {pointsCountFor2FramesAgo: false}]
       ], 
       score: 0
     };
@@ -40,7 +40,7 @@ class App extends React.Component {
         if (this.state.plays[i][j] === 0 && this.state.plays[i][j] !== null) {
           frame = i;
           ball = j;
-          if (j === 1 && ((this.state.plays[i][0] + numberOfPins) > 10)) {
+          if (j === 1 && ((this.state.plays[i][0] + numberOfPins) > 10) && i !== 9) {
             alert((this.state.plays[i][0] + numberOfPins) + " pins selected for frame! That's too many!");
             return;
           }
@@ -74,7 +74,6 @@ class App extends React.Component {
               playsCopy[i][1] = "0";
             } 
             if (i > 1) {
-              //this only works for the first pin 
               if (playsCopy[i - 1][2].strike === true && playsCopy[i - 2][2].strike === true ) {
                 console.log("3 strikes in a row");
                 playsCopy[i - 2][4].totalScore += numberOfPins;
@@ -86,9 +85,6 @@ class App extends React.Component {
             } else {
               playsCopy[i][4].totalScore = playsCopy[i - 1][4].totalScore + 10;
             }            
-            // console.log("playsCopy[i]", playsCopy[i]);
-            // console.log("playsCopy[i + 1]", playsCopy[i + 1]);
-            // console.log("playsCopy[i - 1]", playsCopy[i - 1]);
             console.log("playsCopy[i - 2]", playsCopy[i - 2]);
           }
           if (j === 1 && i === 0) {
@@ -98,12 +94,17 @@ class App extends React.Component {
             playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
             console.log(playsCopy[i]);
           } if (j === 1 && i === 9){
-            if (playsCopy[i][2].strike === false && playsCopy[i][2].spare === false) {
-              playsCopy[i][1] = null;
+            if (playsCopy[i][3].strike === false) {
+              // playsCopy[i][1] = null;
+              playsCopy[i][2] = "0";
               playsCopy[i][4].totalScore = parseInt(parseInt(this.state.plays[i - 1][4].totalScore) + parseInt(this.state.plays[i][0]) + parseInt(numberOfPins));
-              console.log(playsCopy[i]);
+              console.log("game over");
+              alert ("GAME OVER!");
             }
-            alert ("GAME OVER!");
+            if (playsCopy[i][2].strike === true) {
+
+            }
+            
           } 
           this.setState({plays: playsCopy});
           return;
